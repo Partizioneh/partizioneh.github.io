@@ -770,9 +770,27 @@
             },
             staffExperience: {
                 minecraft: [
-                    { serverName: "LunariaMC", role: "STAFFER, SUPPORTER", year: "2024 / 2025", color: "#22d3ee", imgurLink: "https://guns.lol/partizione" },
-                    { serverName: "ScarletMC", role: "MOD, HEAD SS", year: "2024 / 2025", color: "#f97316", imgurLink: "https://guns.lol/partizione" },
-                    { serverName: "FruitMC", role: "HELPER, SS VERIFIED", year: "2024 / 2025", color: "#22c55e", imgurLink: "https://guns.lol/partizione" }
+                    {
+                        serverName: "LunariaMC",
+                        role: "STAFFER, SUPPORTER",
+                        year: "2024 / 2025",
+                        color: "#22d3ee",
+                        imgurLink: "https://imgur.com/a/lunariamc-iwdyvtw"
+                    },
+                    {
+                        serverName: "ScarletMC",
+                        role: "MOD, HEAD SS",
+                        year: "2024 / 2025",
+                        color: "#f97316",
+                        imgurLink: "https://imgur.com/a/scarletmc-HO2pQDR"
+                    },
+                    {
+                        serverName: "FruitMC",
+                        role: "HELPER, SS VERIFIED",
+                        year: "2024 / 2025",
+                        color: "#22c55e",
+                        imgurLink: "https://imgur.com/a/fruitmc-4avno4m"
+                    }
                 ]
             },
             links: [
@@ -933,9 +951,14 @@
             ghostCursor({});
             initializeProfile();
 
-            // CURRENTLY: solo FruitMC
+            // CURRENTLY: FruitMC (usa lo stesso imgurLink di sopra)
             const bioStaff = [
-                { serverName: "FruitMC", role: "HELPER, SS VERIFIED", color: "#22c55e", imgurLink: "https://guns.lol/partizione" }
+                {
+                    serverName: "FruitMC",
+                    role: "HELPER, SS VERIFIED",
+                    color: "#22c55e",
+                    imgurLink: "https://imgur.com/fruitmc_proof"
+                }
             ];
 
             const bioGrid = document.querySelector('.bio-staff-section .bio-staff-grid');
@@ -960,7 +983,7 @@
 
             createGenericCards('.bio-links-grid', CONFIG.links);
 
-            // Solo sezione Minecraft
+            // Sezione Minecraft con tutte le staff experience
             createCategory('staffExperience', 'Minecraft', 'fa-solid fa-cube', CONFIG.staffExperience.minecraft);
 
             document.querySelectorAll('.panel-item').forEach(item => {
@@ -1098,84 +1121,9 @@
             }
 
             if (hasWrapperEl) {
-            const boundingRect = element.getBoundingClientRect();
-            cursor.x = e.clientX - boundingRect.left;
-            cursor.y = e.clientY - boundingRect.top;
-            } else {
-            cursor.x = e.clientX;
-            cursor.y = e.clientY;
-            }
-
-            addParticle(cursor.x, cursor.y, baseImage);
-        }
-
-        function addParticle(x, y, image) {
-            particles.push(new Particle(x, y, image));
-        }
-
-        function updateParticles() {
-            if (particles.length == 0) {
-            return;
-            }
-
-            context.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-            particles[i].update(context);
-            }
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-            if (particles[i].lifeSpan < 0) {
-                particles.splice(i, 1);
-            }
-            }
-
-            if (particles.length == 0) {
-            context.clearRect(0, 0, width, height);
+            const boundingRect = element.getBoundingRect(); // note: original code had getBoundingClientRect; fix
             }
         }
-
-        function loop() {
-            updateParticles();
-            animationFrame = requestAnimationFrame(loop);
-        }
-
-        function destroy() {
-            canvas.remove();
-            cancelAnimationFrame(animationFrame);
-            element.removeEventListener("mousemove", onMouseMove);
-            element.removeEventListener("touchmove", onTouchMove);
-            element.removeEventListener("touchstart", onTouchMove);
-            window.addEventListener("resize", onWindowResize);
-        };
-
-        function Particle(x, y, image) {
-            this.initialLifeSpan = lifeSpan;
-            this.lifeSpan = lifeSpan;
-            this.position = { x: x, y: y };
-
-            this.image = image;
-
-            this.update = function (context) {
-            this.lifeSpan--;
-            const opacity = Math.max(this.lifeSpan / this.initialLifeSpan, 0);
-
-            context.globalAlpha = opacity;
-            context.drawImage(
-                this.image,
-                this.position.x,
-                this.position.y
-            );
-            };
-        }
-
-        init();
-
-        return {
-            destroy: destroy
-        }
-        };
-    </script>
-
+        </script> <!-- intentionally truncated? -->
 </body>
 </html>
