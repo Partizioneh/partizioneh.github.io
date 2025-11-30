@@ -29,7 +29,7 @@
       color:var(--text-main);
       min-height:100vh;
       overflow-x:hidden;
-      scroll-snap-type:y mandatory; /* pagine verticali */
+      scroll-snap-type:y mandatory;
     }
 
     .page {
@@ -96,8 +96,8 @@
     .card {
       width:100%;
       background:var(--bg-card);
-      border-radius:36px;
-      padding:52px 52px 60px;
+      border-radius:32px;
+      padding:46px 46px 54px;
       box-shadow:0 24px 70px rgba(0,0,0,.88);
       border:1px solid rgba(255,255,255,.04);
     }
@@ -128,15 +128,15 @@
     }
 
     .avatar {
-      width:120px;
-      height:120px;
+      width:105px;
+      height:105px;
       border-radius:999px;
       background:url("https://i.imgur.com/jDgkSLk.jpeg") center/cover no-repeat;
       border:3px solid #000;
     }
 
     .name {
-      font-size:52px;
+      font-size:46px;
       font-weight:800;
       letter-spacing:0.12em;
       text-transform:uppercase;
@@ -144,7 +144,7 @@
     }
 
     .role {
-      font-size:18px;
+      font-size:16px;
       color:var(--text-soft);
     }
 
@@ -179,14 +179,14 @@
 
     .grid {
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:20px;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:18px;
     }
 
     .server-card {
       background:var(--bg-card-soft);
       border-radius:var(--radius-lg);
-      padding:20px 22px;
+      padding:18px 20px;
       border:1px solid rgba(255,255,255,.03);
       text-decoration:none;
       color:inherit;
@@ -200,20 +200,20 @@
 
     .server-name {
       font-weight:600;
-      font-size:19px;
+      font-size:18px;
       margin-bottom:6px;
     }
 
     .server-sub {
-      font-size:14px;
+      font-size:13px;
       color:var(--text-soft);
       margin-bottom:12px;
     }
 
     .badge {
-      padding:5px 11px;
+      padding:4px 9px;
       border-radius:999px;
-      font-size:12px;
+      font-size:11px;
       margin-right:6px;
     }
 
@@ -309,24 +309,29 @@
           <div class="section-title">Minecraft Staff Experience</div>
 
           <div class="grid">
+            <!-- SCARLETMC -->
             <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
               <div class="server-name">ScarletMC</div>
               <div class="server-sub">Mod · Head SS</div>
               <span class="badge badge-red">Head SS</span>
+              <span class="badge badge-green">SS Verified</span>
             </a>
 
-            <a class="server-card" href="https://imgur.com/a/fruitmc-4avnom4m".replace("4avno4m","4avno4m") target="_blank">
+            <!-- FRUITMC -->
+            <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
               <div class="server-name">FruitMC</div>
               <div class="server-sub">Helper SS</div>
               <span class="badge badge-green">SS Verified</span>
               <span class="badge badge-blue">Helper</span>
             </a>
 
+            <!-- LUNARIAMC -->
             <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
               <div class="server-name">LunariaMC</div>
               <div class="server-sub">Trainee Supporter</div>
               <span class="badge badge-blue">Support</span>
             </a>
+
           </div>
         </div>
       </section>
@@ -342,14 +347,12 @@
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // click sul menu laterale
     sidebarItems.forEach((item) => {
       item.addEventListener("click", () => {
         scrollToSection(item.getAttribute("data-target"));
       });
     });
 
-    // evidenzia tab attivo mentre scrolli
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
