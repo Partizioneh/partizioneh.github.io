@@ -10,19 +10,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         :root {
-            --bg-primary: #020617;
-            --bg-secondary: #020617;
-            --bg-tertiary: #020a1b;
-            --bg-card: #020818;
-            --accent-primary: #0f766e;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-tertiary: #111111;
+            --bg-card: #0f0f0f;
+            --accent-primary: #0b6470;
             --accent-secondary: #22d3ee;
             --text-primary: #ffffff;
             --text-secondary: #a1a1aa;
             --text-tertiary: #71717a;
-            --border-primary: #0f172a;
-            --border-secondary: #1f2937;
+            --border-primary: #1f1f23;
+            --border-secondary: #27272a;
             --glow-primary: #22d3ee;
-            --glow-secondary: #0ea5e9;
+            --glow-secondary: #0b6470;
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -118,7 +118,7 @@
 
         .left-panel {
             width: 280px;
-            background: rgba(10, 18, 35, 0.9);
+            background: rgba(15, 15, 15, 0.8);
             border-right: 1px solid var(--border-primary);
             padding: 1.5rem 0;
             display: flex;
@@ -260,7 +260,7 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0f766e, #22d3ee, #0f766e, #22d3ee);
+            background: linear-gradient(135deg, #0b6470, #22d3ee, #0b6470, #22d3ee);
             position: absolute;
             top: 0;
             left: 0;
@@ -295,6 +295,13 @@
             font-size: 3rem;
             position: relative;
             overflow: hidden;
+        }
+
+        .profile-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .section-bio h1 {
@@ -365,7 +372,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, #0f766e, #22d3ee);
+            background: linear-gradient(90deg, #0b6470, #22d3ee);
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
@@ -414,13 +421,6 @@
             line-height: 1;
         }
 
-        .profile-inner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
         .bio-details {
             text-align: left;
             margin-top: 1.5rem;
@@ -446,34 +446,6 @@
             width: 100%;
         }
 
-        .bio-staff-category {
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .bio-staff-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .bio-section-header {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 2px solid var(--accent-primary);
-            padding-bottom: 0.25rem;
-        }
-
         .bio-staff-section {
             margin-top: 3rem;
             width: 100%;
@@ -491,46 +463,25 @@
             margin-top: 1rem;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes profileGlow {
-            0% {
-                box-shadow: 0 0 60px var(--glow-primary);
-            }
-
-            100% {
-                box-shadow: 0 0 80px var(--glow-secondary);
-            }
+        .bio-staff-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
         }
 
         @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes textGradient {
-            0% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         body::before {
@@ -539,25 +490,37 @@
             inset: 0;
             z-index: -2;
             background: repeating-linear-gradient(180deg,
-                    #0f172a 0%,
-                    #0f766e 20%,
+                    #0b6470 0%,
+                    #003944 20%,
                     #22d3ee 50%,
-                    #0f766e 80%,
-                    #0f172a 100%);
+                    #003944 80%,
+                    #0b6470 100%);
             background-size: 100% 300%;
             background-repeat: repeat-y;
             animation: backgroundFlow 12s linear infinite;
-            opacity: 0.45;
+            opacity: 0.5;
         }
 
         @keyframes backgroundFlow {
-            from {
-                background-position: 0 0;
-            }
+            from { background-position: 0 0; }
+            to { background-position: 0 300%; }
+        }
 
-            to {
-                background-position: 0 300%;
-            }
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.2s ease;
         }
 
         @media (max-width: 1024px) {
@@ -633,23 +596,6 @@
             }
         }
 
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: transparent;
-            z-index: 1000;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            width: 0%;
-            transition: width 0.2s ease;
-        }
-
         ::selection {
             background: var(--accent-primary);
             color: #ffffff;
@@ -705,27 +651,28 @@
                         </div>
                     </div>
                     <h1 id="profileName" style="
-                    font-size: clamp(2.5rem, 5vw, 4rem);
-                    font-weight: 900;
-                    background: linear-gradient(
-                        90deg,
-                        #0f766e 0%,
-                        #22d3ee 25%,
-                        #0f766e 50%,
-                        #22d3ee 75%,
-                        #0f766e 100%
-                    );
-                    background-size: 200% auto;
-                    background-clip: text;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    margin-bottom: 0;
-                    letter-spacing: -0.02em;
-                    animation: textGradient 1.5s linear infinite;
-                    position: relative;
-                    background-position: 0% 50%;
-                "></h1>
+                        font-size: clamp(2.5rem, 5vw, 4rem);
+                        font-weight: 900;
+                        background: linear-gradient(
+                            90deg,
+                            #0b6470 0%,
+                            #22d3ee 25%,
+                            #0b6470 50%,
+                            #22d3ee 75%,
+                            #0b6470 100%
+                        );
+                        background-size: 200% auto;
+                        background-clip: text;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        margin-bottom: 0;
+                        letter-spacing: -0.02em;
+                        animation: textGradient 1.5s linear infinite;
+                        position: relative;
+                        background-position: 0% 50%;
+                    "></h1>
                     <p class="subtitle" id="profileSubtitle"></p>
+
                     <div class="bio-tabs">
                         <div class="bio-tab">
                             <strong>Age:</strong> 16 y/o
@@ -736,16 +683,20 @@
                         <div class="bio-tab">
                             <strong>Occupation:</strong> Student • Staff Minecraft
                         </div>
+
+                        <!-- CURRENTLY -->
                         <div class="bio-staff-section">
                             <h3 class="bio-staff-title"><i class="fa-solid fa-user-clock"></i> CURRENTLY</h3>
                             <div class="bio-staff-grid"></div>
                         </div>
 
+                        <!-- LINKS -->
                         <div class="bio-links-section">
                             <h3 class="bio-staff-title"><i class="fa-solid fa-link"></i> LINKS</h3>
                             <div class="bio-links-grid"></div>
                         </div>
                     </div>
+
                     <div class="bio-details" id="bioDetailsContent">
                     </div>
                 </div>
@@ -821,6 +772,7 @@
 
         function createCategory(targetSectionId, title, icon, servers) {
             if (!servers || servers.length === 0) return;
+
             const section = document.getElementById(targetSectionId);
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'staff-category';
@@ -932,7 +884,7 @@
             bgStartAudioH1.style.opacity = '0';
 
             setTimeout(() => {
-                document.body.style.overflowY = 'auto';
+                document.body.style.overflowY = 'auto'
                 appContainer.classList.add('animate-in');
                 muteBtn.classList.add('animate-in');
             }, 100);
@@ -951,13 +903,13 @@
             ghostCursor({});
             initializeProfile();
 
-            // CURRENTLY: FruitMC (usa lo stesso imgurLink di sopra)
+            // CURRENTLY (solo FruitMC)
             const bioStaff = [
                 {
                     serverName: "FruitMC",
                     role: "HELPER, SS VERIFIED",
                     color: "#22c55e",
-                    imgurLink: "https://imgur.com/fruitmc_proof"
+                    imgurLink: "https://imgur.com/a/fruitmc-4avno4m"
                 }
             ];
 
@@ -981,11 +933,13 @@
                 bioGrid.appendChild(card);
             });
 
+            // Links (Discord, NameMC, guns.lol)
             createGenericCards('.bio-links-grid', CONFIG.links);
 
-            // Sezione Minecraft con tutte le staff experience
+            // Staff Experience: Minecraft
             createCategory('staffExperience', 'Minecraft', 'fa-solid fa-cube', CONFIG.staffExperience.minecraft);
 
+            // Scroll-nav
             document.querySelectorAll('.panel-item').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1016,114 +970,190 @@
 
     <script>
         function ghostCursor(options) {
-        let hasWrapperEl = options && options.element;
-        let element = hasWrapperEl || document.body;
+            let hasWrapperEl = options && options.element;
+            let element = hasWrapperEl || document.body;
 
-        let randomDelay = options && options.randomDelay;
-        let minDelay = options && options.minDelay || 5;
-        let maxDelay = options && options.maxDelay || 50;
-        const lifeSpan = options && options.lifeSpan || 40;
+            let randomDelay = options && options.randomDelay;
+            let minDelay = options && options.minDelay || 5;
+            let maxDelay = options && options.maxDelay || 50;
+            const lifeSpan = options && options.lifeSpan || 40;
 
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        let cursor = { x: width / 2, y: width / 2 };
-        let particles = [];
-        let canvas, context, animationFrame;
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            let cursor = { x: width / 2, y: width / 2 };
+            let particles = [];
+            let canvas, context, animationFrame;
 
-        let baseImage = new Image();
-        if (options && options.image) {
-            baseImage.src = options.image;
-        } else {
-            baseImage.src =
-            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAATCAYAAACk9eypAAAAAXNSR0IArs4c6QAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAAFARIAAwAAAAEAAQAAARoABQAAAAEAAABKARsABQAAAAEAAABSASgAAwAAAAEAAgAAh2kABAAAAAEAAABaAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAAEwAAAAAChpcNAAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAABqElEQVQoFY3SPUvDQBgH8BREpRHExYiDgmLFl6WC+AYmWeyLg4i7buJX8DMpOujgyxGvUYeCgzhUQUSKKLUS0+ZyptXh8Z5Ti621ekPyJHl+uftfomhaf9Ei5JyxXKfynyEA6EYcLHpwyflT958GAQ7DTABNHd8EbtDbEH2BD5QEQmi2mM8P/Iq+A0SzszEg+3sPjDnDdVEtQKQbMUidHD3xVzf6A9UDEmEm+8h9KTqTVUjT+vB53aHrCbAPiceYq1dQI1Aqv4EhMll0jzv+Y0yiRgCnLRSYyDQHVoqUXe4uKL9l+L7GXC4vkMhE6eW/AOJs9k583ORDUyXMZ8F5SVHVVnllmPNKSFagAJ5DofaqGXw/gHBYg51dIldkmknY3tguv3jOtHR4+MqAzaraJXbEhqHhcQlwGSOi5pytVQHZLN5s0WNe8HPrLYlFsO20RPHkImxsbmHdLJFI76th7Z4SeuF53hTeFLvhRCJRCTKZKxgdnRDbW+iozFJbBMw14/ElwGYc0egMBMFzT21f5Rog33Z7dX02GBm7WV5ZfT5Nn5bE3zuCDe9UxdTpNvK+5AAAAABJRU5ErkJggg==";
-        }
-
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
-
-        prefersReducedMotion.onchange = () => {
-            if (prefersReducedMotion.matches) {
-            destroy();
+            let baseImage = new Image();
+            if (options && options.image) {
+                baseImage.src = options.image;
             } else {
+                baseImage.src =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAATCAYAAACk9eypAAAAAXNSR0IArs4c6QAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAAFARIAAwAAAAEAAQAAARoABQAAAAEAAABKARsABQAAAAEAAABSASgAAwAAAAEAAgAAh2kABAAAAAEAAABaAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAAEwAAAAAChpcNAAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAABqElEQVQoFY3SPUvDQBgH8BREpRHExYiDgmLFl6WC+AYmWeyLg4i7buJX8DMpOujgyxGvUYeCgzhUQUSKKLUS0+ZyptXh8Z5Ti621ekPyJHl+uftfomhaf9Ei5JyxXKfynyEA6EYcLHpwyflT958GAQ7DTABNHd8EbtDbEH2BD5QEQmi2mM8P/Iq+A0SzszEg+3sPjDnDdVEtQKQbMUidHD3xVzf6A9UDEmEm+8h9KTqTVUjT+vB53aHrCbAPiceYq1dQI1Aqv4EhMll0jzv+Y0yiRgCnLRSYyDQHVoqUXe4uKL9l+L7GXC4vkMhE6eW/AOJs9k583ORDUyXMZ8F5SVHVVnllmPNKSFagAJ5DofaqGXw/gHBYg51dIldkmknY3tguv3jOtHR4+MqAzaraJXbEhqHhcQlwGSOi5pytVQHZLN5s0WNe8HPrLYlFsO20RPHkImxsbmHdLJFI76th7Z4SeuF53hTeFLvhRCJRCTKZKxgdnRDbW+iozFJbBMw14/ElwGYc0egMBMFzT21f5Rog33Z7dX02GBm7WV5ZfT5Nn5bE3zuCDe9UxdTpNvK+5AAAAABJRU5ErkJggg==";
+            }
+
+            const prefersReducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            prefersReducedMotion.onchange = () => {
+                if (prefersReducedMotion.matches) {
+                    destroy();
+                } else {
+                    init();
+                }
+            };
+
+            function init() {
+                if (prefersReducedMotion.matches) {
+                    console.log(
+                        "This browser has prefers reduced motion turned on, so the cursor did not init"
+                    );
+                    return false;
+                }
+
+                canvas = document.createElement("canvas");
+                context = canvas.getContext("2d");
+                canvas.style.top = "0px";
+                canvas.style.left = "0px";
+                canvas.style.pointerEvents = "none";
+                canvas.style.zIndex = options.zIndex || "9999999999";
+
+                if (hasWrapperEl) {
+                    canvas.style.position = "absolute";
+                    element.appendChild(canvas);
+                    canvas.width = element.clientWidth;
+                    canvas.height = element.clientHeight;
+                } else {
+                    canvas.style.position = "fixed";
+                    document.body.appendChild(canvas);
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+
+                bindEvents();
+                loop();
+            }
+
+            function bindEvents() {
+                element.addEventListener("mousemove", onMouseMove);
+                element.addEventListener("touchmove", onTouchMove, { passive: true });
+                element.addEventListener("touchstart", onTouchMove, { passive: true });
+                window.addEventListener("resize", onWindowResize);
+            }
+
+            function onWindowResize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+
+                if (hasWrapperEl) {
+                    canvas.width = element.clientWidth;
+                    canvas.height = element.clientHeight;
+                } else {
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+            }
+
+            function onTouchMove(e) {
+                if (e.touches.length > 0) {
+                    for (let i = 0; i < e.touches.length; i++) {
+                        addParticle(e.touches[i].clientX, e.touches[i].clientY, baseImage);
+                    }
+                }
+            }
+
+            let getDelay = () => Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+            let lastTimeParticleAdded = Date.now(),
+                interval = getDelay();
+
+            function onMouseMove(e) {
+                if (randomDelay) {
+                    if (lastTimeParticleAdded + interval > Date.now()) return;
+                    lastTimeParticleAdded = Date.now();
+                    interval = getDelay();
+                }
+
+                if (hasWrapperEl) {
+                    const boundingRect = element.getBoundingClientRect();
+                    cursor.x = e.clientX - boundingRect.left;
+                    cursor.y = e.clientY - boundingRect.top;
+                } else {
+                    cursor.x = e.clientX;
+                    cursor.y = e.clientY;
+                }
+
+                addParticle(cursor.x, cursor.y, baseImage);
+            }
+
+            function addParticle(x, y, image) {
+                particles.push(new Particle(x, y, image));
+            }
+
+            function updateParticles() {
+                if (particles.length == 0) {
+                    return;
+                }
+
+                context.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update(context);
+                }
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    if (particles[i].lifeSpan < 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                if (particles.length == 0) {
+                    context.clearRect(0, 0, width, height);
+                }
+            }
+
+            function loop() {
+                updateParticles();
+                animationFrame = requestAnimationFrame(loop);
+            }
+
+            function destroy() {
+                if (canvas) {
+                    canvas.remove();
+                }
+                cancelAnimationFrame(animationFrame);
+                element.removeEventListener("mousemove", onMouseMove);
+                element.removeEventListener("touchmove", onTouchMove);
+                element.removeEventListener("touchstart", onTouchMove);
+                window.removeEventListener("resize", onWindowResize);
+            }
+
+            function Particle(x, y, image) {
+                this.initialLifeSpan = lifeSpan;
+                this.lifeSpan = lifeSpan;
+                this.position = { x: x, y: y };
+                this.image = image;
+
+                this.update = function (context) {
+                    this.lifeSpan--;
+                    const opacity = Math.max(this.lifeSpan / this.initialLifeSpan, 0);
+
+                    context.globalAlpha = opacity;
+                    context.drawImage(
+                        this.image,
+                        this.position.x,
+                        this.position.y
+                    );
+                };
+            }
+
             init();
+
+            return {
+                destroy: destroy
             }
         };
+    </script>
 
-        function init() {
-            if (prefersReducedMotion.matches) {
-            console.log(
-                "This browser has prefers reduced motion turned on, so the cursor did not init"
-            );
-            return false;
-            }
-
-            canvas = document.createElement("canvas");
-            context = canvas.getContext("2d");
-            canvas.style.top = "0px";
-            canvas.style.left = "0px";
-            canvas.style.pointerEvents = "none";
-            canvas.style.zIndex = options.zIndex || "9999999999";
-
-            if (hasWrapperEl) {
-            canvas.style.position = "absolute";
-            element.appendChild(canvas);
-            canvas.width = element.clientWidth;
-            canvas.height = element.clientHeight;
-            } else {
-            canvas.style.position = "fixed";
-            document.body.appendChild(canvas);
-            canvas.width = width;
-            canvas.height = height;
-            }
-
-            bindEvents();
-            loop();
-        }
-
-        function bindEvents() {
-            element.addEventListener("mousemove", onMouseMove);
-            element.addEventListener("touchmove", onTouchMove, { passive: true });
-            element.addEventListener("touchstart", onTouchMove, { passive: true });
-            window.addEventListener("resize", onWindowResize);
-        }
-
-        function onWindowResize(e) {
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            if (hasWrapperEl) {
-            canvas.width = element.clientWidth;
-            canvas.height = element.clientHeight;
-            } else {
-            canvas.width = width;
-            canvas.height = height;
-            }
-        }
-
-        function onTouchMove(e) {
-            if (e.touches.length > 0) {
-            for (let i = 0; i < e.touches.length; i++) {
-                addParticle(e.touches[i].clientX, e.touches[i].clientY, baseImage);
-            }
-            }
-        }
-
-        let getDelay = () => Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
-        let lastTimeParticleAdded = Date.now(),
-            interval = getDelay();
-
-        function onMouseMove(e) {
-            if (randomDelay) {
-            if (lastTimeParticleAdded + interval > Date.now()) return;
-            lastTimeParticleAdded = Date.now();
-            interval = getDelay();
-            }
-
-            if (hasWrapperEl) {
-            const boundingRect = element.getBoundingRect(); // note: original code had getBoundingClientRect; fix
-            }
-        }
-        </script> <!-- intentionally truncated? -->
 </body>
 </html>
