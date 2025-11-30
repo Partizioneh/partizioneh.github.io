@@ -36,9 +36,6 @@
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
-
-      /* scroll “a pagine” */
-      scroll-snap-type: y mandatory;
     }
 
     .page {
@@ -101,17 +98,14 @@
     }
 
     main section {
-      scroll-snap-align: start;
-      min-height: calc(100vh - 120px); /* effetto “una pagina intera” */
-      display: flex;
-      align-items: center;
+      margin-bottom: 40px;
     }
 
     .card {
       width: 100%;
       background: var(--bg-card);
       border-radius: 32px;
-      padding: 32px 26px 36px;
+      padding: 40px 40px 46px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.04);
     }
@@ -122,43 +116,43 @@
       letter-spacing: 0.2em;
       color: var(--text-soft);
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
     /* BIO */
     .bio-header {
       text-align: center;
-      margin-bottom: 26px;
+      margin-bottom: 30px;
     }
 
     .avatar-wrapper {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 4px;
+      padding: 5px;
       border-radius: 999px;
       background: radial-gradient(circle, var(--accent), transparent 65%);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .avatar {
-      width: 86px;
-      height: 86px;
+      width: 96px;
+      height: 96px;
       border-radius: 999px;
       background: url("https://i.imgur.com/jDgkSLk.jpeg") center/cover no-repeat;
       border: 3px solid #000;
     }
 
     .name {
-      font-size: 32px;
+      font-size: 40px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .role {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-soft);
     }
 
@@ -166,8 +160,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 18px 30px;
-      margin: 24px 0 10px;
+      gap: 24px 40px;
+      margin: 28px 0 14px;
       font-size: 14px;
     }
 
@@ -177,6 +171,7 @@
       font-size: 11px;
       color: var(--text-soft);
       display: block;
+      margin-bottom: 4px;
     }
 
     .bio-field span.value {
@@ -189,19 +184,19 @@
       letter-spacing: 0.24em;
       color: var(--text-soft);
       text-align: center;
-      margin: 26px 0 16px;
+      margin: 30px 0 18px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
     }
 
     .server-card {
       background: var(--bg-card-soft);
       border-radius: var(--radius-lg);
-      padding: 16px 18px;
+      padding: 18px 20px;
       border: 1px solid rgba(255, 255, 255, 0.03);
       text-decoration: none;
       color: inherit;
@@ -215,18 +210,18 @@
 
     .server-name {
       font-weight: 600;
-      font-size: 16px;
+      font-size: 17px;
       margin-bottom: 6px;
     }
 
     .server-sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .badge {
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
       font-size: 11px;
       margin-right: 6px;
@@ -235,30 +230,6 @@
     .badge-green { background: rgba(17, 138, 75, .16); border: 1px solid rgba(17, 138, 75, .6); }
     .badge-blue  { background: rgba(14, 107, 184, .16); border: 1px solid rgba(14, 107, 184, .6); }
     .badge-red   { background: rgba(176, 27, 51, .16); border: 1px solid rgba(176, 27, 51, .75); }
-
-    /* bottoni freccia */
-    .scroll-btn {
-      margin-top: 26px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.35);
-      color: var(--text-main);
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s, border 0.15s;
-    }
-
-    .scroll-btn:hover {
-      background: var(--accent);
-      border-color: transparent;
-      transform: translateY(-1px);
-    }
 
     @media (max-width: 880px) {
       .page {
@@ -285,16 +256,12 @@
         padding-inline: 14px;
       }
 
-      main section {
-        min-height: calc(100vh - 160px);
-      }
-
       .card {
-        padding: 24px 18px 30px;
+        padding: 28px 18px 34px;
       }
 
       .name {
-        font-size: 26px;
+        font-size: 30px;
       }
     }
   </style>
@@ -312,7 +279,7 @@
 
     <!-- MAIN CONTENT -->
     <main class="content">
-      <!-- BIO PAGE -->
+      <!-- BIO -->
       <section id="bio">
         <div class="card">
           <div class="section-title">Bio</div>
@@ -348,14 +315,10 @@
               <span class="badge badge-blue">Helper</span>
             </a>
           </div>
-
-          <div style="text-align:center;">
-            <button class="scroll-btn" data-target="staff-experience">↓ Staff Experience</button>
-          </div>
         </div>
       </section>
 
-      <!-- STAFF EXPERIENCE PAGE -->
+      <!-- STAFF EXPERIENCE -->
       <section id="staff-experience">
         <div class="card">
           <div class="section-title">Minecraft Staff Experience</div>
@@ -380,10 +343,6 @@
               <span class="badge badge-blue">Support</span>
             </a>
           </div>
-
-          <div style="text-align:center;">
-            <button class="scroll-btn" data-target="bio">↑ Back to Bio</button>
-          </div>
         </div>
       </section>
     </main>
@@ -392,7 +351,6 @@
   <script>
     const sidebarItems = document.querySelectorAll(".sidebar-item");
     const sections = document.querySelectorAll("main section");
-    const scrollButtons = document.querySelectorAll(".scroll-btn");
 
     function scrollToSection(id) {
       const el = document.getElementById(id);
@@ -403,13 +361,6 @@
     sidebarItems.forEach((item) => {
       item.addEventListener("click", () => {
         scrollToSection(item.getAttribute("data-target"));
-      });
-    });
-
-    // click frecce su/giù
-    scrollButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        scrollToSection(btn.getAttribute("data-target"));
       });
     });
 
