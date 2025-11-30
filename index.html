@@ -36,6 +36,9 @@
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+
+      /* scroll “a pagine” */
+      scroll-snap-type: y mandatory;
     }
 
     .page {
@@ -57,6 +60,7 @@
       padding: 16px 0;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.03);
+      height: fit-content;
     }
 
     .sidebar-title {
@@ -96,13 +100,20 @@
       max-width: 900px;
     }
 
+    main section {
+      scroll-snap-align: start;
+      min-height: calc(100vh - 120px); /* effetto “una pagina intera” */
+      display: flex;
+      align-items: center;
+    }
+
     .card {
+      width: 100%;
       background: var(--bg-card);
       border-radius: 32px;
       padding: 32px 26px 36px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.04);
-      margin-bottom: 32px;
     }
 
     .section-title {
@@ -202,134 +213,222 @@
       border-color: var(--accent-soft);
     }
 
+    .server-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .server-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
     .badge {
       padding: 3px 10px;
       border-radius: 999px;
       font-size: 11px;
+      margin-right: 6px;
     }
 
     .badge-green { background: rgba(17, 138, 75, .16); border: 1px solid rgba(17, 138, 75, .6); }
-    .badge-blue { background: rgba(14, 107, 184, .16); border: 1px solid rgba(14, 107, 184, .6); }
-    .badge-red  { background: rgba(176, 27, 51, .16); border: 1px solid rgba(176, 27, 51, .75); }
+    .badge-blue  { background: rgba(14, 107, 184, .16); border: 1px solid rgba(14, 107, 184, .6); }
+    .badge-red   { background: rgba(176, 27, 51, .16); border: 1px solid rgba(176, 27, 51, .75); }
 
+    /* bottoni freccia */
+    .scroll-btn {
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.35);
+      color: var(--text-main);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, border 0.15s;
+    }
+
+    .scroll-btn:hover {
+      background: var(--accent);
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 880px) {
+      .page {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .sidebar-menu {
+        display: flex;
+        justify-content: center;
+      }
+
+      .sidebar-item {
+        border-radius: 999px;
+        padding-inline: 14px;
+      }
+
+      main section {
+        min-height: calc(100vh - 160px);
+      }
+
+      .card {
+        padding: 24px 18px 30px;
+      }
+
+      .name {
+        font-size: 26px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="page">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Portfolio</div>
+      <ul class="sidebar-menu">
+        <li class="sidebar-item active" data-target="bio">👤 Bio</li>
+        <li class="sidebar-item" data-target="staff-experience">🛡️ Staff Experience</li>
+      </ul>
+    </aside>
 
-<div class="page">
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- BIO PAGE -->
+      <section id="bio">
+        <div class="card">
+          <div class="section-title">Bio</div>
+          <div class="bio-header">
+            <div class="avatar-wrapper">
+              <div class="avatar"></div>
+            </div>
+            <div class="name">PARTIZIONE</div>
+            <div class="role">DFIR · PC Checker · Minecraft Staff</div>
+          </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-title">Portfolio</div>
-    <ul class="sidebar-menu">
-      <li class="sidebar-item active" data-target="bio">👤 Bio</li>
-      <li class="sidebar-item" data-target="staff-experience">🛡️ Staff Experience</li>
-    </ul>
-  </aside>
+          <div class="bio-grid">
+            <div class="bio-field">
+              <span class="label">Age</span>
+              <span class="value">16</span>
+            </div>
+            <div class="bio-field">
+              <span class="label">Place</span>
+              <span class="value">Italy</span>
+            </div>
+            <div class="bio-field">
+              <span class="label">Occupation</span>
+              <span class="value">Minecraft Staff &amp; Checker</span>
+            </div>
+          </div>
 
-  <!-- CONTENT -->
-  <main class="content">
+          <div class="subsection-title">Currently</div>
+          <div class="grid">
+            <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
+              <div class="server-name">FruitMC</div>
+              <div class="server-sub">Helper SS · Currently</div>
+              <span class="badge badge-green">SS Verified</span>
+              <span class="badge badge-blue">Helper</span>
+            </a>
+          </div>
 
-    <!-- BIO -->
-    <section id="bio" class="card">
-      <div class="section-title">Bio</div>
-
-      <div class="bio-header">
-        <div class="avatar-wrapper">
-          <div class="avatar"></div>
+          <div style="text-align:center;">
+            <button class="scroll-btn" data-target="staff-experience">↓ Staff Experience</button>
+          </div>
         </div>
-        <div class="name">PARTIZIONE</div>
-        <div class="role">DFIR · PC Checker · Minecraft Staff</div>
-      </div>
+      </section>
 
-      <div class="bio-grid">
-        <div class="bio-field">
-          <span class="label">Age</span>
-          <span class="value">16</span>
+      <!-- STAFF EXPERIENCE PAGE -->
+      <section id="staff-experience">
+        <div class="card">
+          <div class="section-title">Minecraft Staff Experience</div>
+
+          <div class="grid">
+            <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
+              <div class="server-name">ScarletMC</div>
+              <div class="server-sub">Mod · Head SS</div>
+              <span class="badge badge-red">Head SS</span>
+            </a>
+
+            <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
+              <div class="server-name">FruitMC</div>
+              <div class="server-sub">Helper SS</div>
+              <span class="badge badge-green">SS Verified</span>
+              <span class="badge badge-blue">Helper</span>
+            </a>
+
+            <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
+              <div class="server-name">LunariaMC</div>
+              <div class="server-sub">Trainee Supporter</div>
+              <span class="badge badge-blue">Support</span>
+            </a>
+          </div>
+
+          <div style="text-align:center;">
+            <button class="scroll-btn" data-target="bio">↑ Back to Bio</button>
+          </div>
         </div>
-        <div class="bio-field">
-          <span class="label">Place</span>
-          <span class="value">Italy</span>
-        </div>
-        <div class="bio-field">
-          <span class="label">Occupation</span>
-          <span class="value">Minecraft Staff & Checker</span>
-        </div>
-      </div>
+      </section>
+    </main>
+  </div>
 
-      <div class="subsection-title">Currently</div>
+  <script>
+    const sidebarItems = document.querySelectorAll(".sidebar-item");
+    const sections = document.querySelectorAll("main section");
+    const scrollButtons = document.querySelectorAll(".scroll-btn");
 
-      <div class="grid">
-        <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
-          <div class="server-name">FruitMC</div>
-          <div class="server-sub">Helper SS · Currently</div>
-          <span class="badge badge-green">SS Verified</span>
-          <span class="badge badge-blue">Helper</span>
-        </a>
-      </div>
-    </section>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-    <!-- STAFF EXPERIENCE -->
-    <section id="staff-experience" class="card">
-      <div class="section-title">Minecraft Staff Experience</div>
-
-      <div class="grid">
-
-        <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
-          <div class="server-name">ScarletMC</div>
-          <div class="server-sub">Mod · Head SS</div>
-          <span class="badge badge-red">Head SS</span>
-        </a>
-
-        <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
-          <div class="server-name">FruitMC</div>
-          <div class="server-sub">Helper SS</div>
-          <span class="badge badge-green">SS Verified</span>
-          <span class="badge badge-blue">Helper</span>
-        </a>
-
-        <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
-          <div class="server-name">LunariaMC</div>
-          <div class="server-sub">Trainee Supporter</div>
-          <span class="badge badge-blue">Support</span>
-        </a>
-
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  const items = document.querySelectorAll(".sidebar-item");
-
-  items.forEach((item) => {
-    item.addEventListener("click", () => {
-      const targetId = item.getAttribute("data-target");
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
-
-  const sections = document.querySelectorAll("main section");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          items.forEach((i) => {
-            i.classList.toggle("active", i.getAttribute("data-target") === id);
-          });
-        }
+    // click menu sinistra
+    sidebarItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        scrollToSection(item.getAttribute("data-target"));
       });
-    },
-    { threshold: 0.5 }
-  );
+    });
 
-  sections.forEach((sec) => observer.observe(sec));
-</script>
+    // click frecce su/giù
+    scrollButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        scrollToSection(btn.getAttribute("data-target"));
+      });
+    });
 
+    // evidenzia tab attivo in base allo scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            sidebarItems.forEach((i) => {
+              i.classList.toggle("active", i.getAttribute("data-target") === id);
+            });
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+  </script>
 </body>
 </html>
