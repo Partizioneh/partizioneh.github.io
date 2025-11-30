@@ -1,373 +1,1181 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Partizione - Staff Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-main: #050508;
-      --bg-card: #111117;
-      --bg-card-soft: #191922;
-      --accent: #c5164f;
-      --accent-soft: rgba(197, 22, 79, 0.25);
-      --text-main: #f5f5f5;
-      --text-soft: #b1b1c2;
-      --badge-green: #118a4b;
-      --badge-blue: #0e6bb8;
-      --badge-red: #b01b33;
-      --radius-lg: 22px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partizione</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    * { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
+        :root {
+            --bg-primary: #020617;
+            --bg-secondary: #020617;
+            --bg-tertiary: #020a1b;
+            --bg-card: #020818;
+            --accent-primary: #0f766e;
+            --accent-secondary: #22d3ee;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --border-primary: #0f172a;
+            --border-secondary: #1f2937;
+            --glow-primary: #22d3ee;
+            --glow-secondary: #0ea5e9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
 
-    body {
-      font-family:"Poppins",system-ui,sans-serif;
-      background:radial-gradient(circle at left,#2b0015,var(--bg-main));
-      color:var(--text-main);
-      min-height:100vh;
-      overflow-x:hidden;
-      scroll-snap-type:y mandatory;
-    }
+        .app-container.animate-in,
+        #mute-btn.animate-in {
+            opacity: 1;
+        }
 
-    .page {
-      max-width:1400px;
-      margin:0 auto;
-      padding:40px 24px 80px;
-      display:flex;
-      gap:40px;
-    }
+        .section {
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
 
-    /* SIDEBAR */
-    .sidebar {
-      position:sticky;
-      top:40px;
-      align-self:flex-start;
-      width:230px;
-      background:linear-gradient(145deg,#1a0a13,#050309);
-      border-radius:26px;
-      padding:18px 0;
-      box-shadow:0 18px 45px rgba(0,0,0,0.75);
-      border:1px solid rgba(255,255,255,0.03);
-      height:fit-content;
-    }
+        #staffExperience {
+            transition-delay: 0.4s;
+        }
 
-    .sidebar-title {
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:0.18em;
-      color:var(--text-soft);
-      text-align:center;
-      margin-bottom:12px;
-    }
+        #mute-btn {
+            background: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10000;
+            color: #fff;
+            border: 3px solid #fff;
+            border-radius: .5rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .5s ease-out, transform 1s ease-out;
+        }
 
-    .sidebar-menu { list-style:none; }
+        #bg-start-audio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000000;
+            background: #000;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            transition: opacity 0.2s ease-in-out;
+            cursor: pointer;
+            font-size: 15.2px;
+        }
 
-    .sidebar-item {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:11px 22px;
-      cursor:pointer;
-      font-size:15px;
-      color:var(--text-soft);
-      transition:background .2s,color .2s,transform .1s;
-    }
+        #bg-start-audio h1 {
+            transition: opacity 0.05s ease-in-out;
+            opacity: 1;
+        }
 
-    .sidebar-item.active,
-    .sidebar-item:hover {
-      background:linear-gradient(90deg,var(--accent),rgba(197,22,79,.2));
-      color:#fff;
-      transform:translateX(2px);
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* MAIN CONTENT */
-    .content { flex:1; max-width:1050px; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    main section {
-      scroll-snap-align:start;
-      min-height:calc(100vh - 120px);
-      display:flex;
-      align-items:center;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            overflow-y: hidden;
+            line-height: 1.6;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            min-height: 100vh;
+        }
 
-    .card {
-      width:100%;
-      background:var(--bg-card);
-      border-radius:36px;
-      padding:52px 52px 60px;
-      box-shadow:0 24px 70px rgba(0,0,0,.88);
-      border:1px solid rgba(255,255,255,.04);
-    }
+        .app-container {
+            display: flex;
+            width: 100vw;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity .5s ease-out, transform 1s ease-out;
+        }
 
-    .section-title {
-      font-size:15px;
-      text-transform:uppercase;
-      letter-spacing:0.22em;
-      color:var(--text-soft);
-      text-align:center;
-      margin-bottom:22px;
-    }
+        .left-panel {
+            width: 280px;
+            background: rgba(10, 18, 35, 0.9);
+            border-right: 1px solid var(--border-primary);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: fixed;
+            top: 50%;
+            left: 100px;
+            transform: translateY(-50%);
+            height: auto;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 100;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-primary);
+            transition-delay: 0.2s;
+        }
 
-    /* BIO */
-    .bio-header {
-      text-align:center;
-      margin-bottom:34px;
-    }
+        .panel-header {
+            padding: 0 1.5rem 1rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .avatar-wrapper {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:6px;
-      border-radius:999px;
-      background:radial-gradient(circle,var(--accent),transparent 65%);
-      margin-bottom:14px;
-    }
+        .panel-header i {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
 
-    .avatar {
-      width:120px;
-      height:120px;
-      border-radius:999px;
-      background:url("https://i.imgur.com/jDgkSLk.jpeg") center/cover no-repeat;
-      border:3px solid #000;
-    }
+        .panel-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
 
-    .name {
-      font-size:52px;
-      font-weight:800;
-      letter-spacing:0.12em;
-      text-transform:uppercase;
-      margin-bottom:8px;
-    }
+        .panel-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
 
-    .role {
-      font-size:18px;
-      color:var(--text-soft);
-    }
+        .panel-item.active {
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            font-weight: 600;
+            border-left: 4px solid var(--accent-secondary);
+            padding-left: calc(1.5rem - 4px);
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+        }
 
-    .bio-grid {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:26px 46px;
-      margin:30px 0 18px;
-      font-size:16px;
-    }
+        .panel-item.active:hover {
+            opacity: 0.9;
+        }
 
-    .bio-field span.label {
-      text-transform:uppercase;
-      letter-spacing:0.16em;
-      font-size:12px;
-      color:var(--text-soft);
-      display:block;
-      margin-bottom:4px;
-    }
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 200px;
+        }
 
-    .bio-field span.value { font-weight:500; }
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+            width: 100%;
+            min-height: auto;
+            scroll-margin-top: 20px;
+        }
 
-    .subsection-title {
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:0.26em;
-      color:var(--text-soft);
-      text-align:center;
-      margin:32px 0 20px;
-    }
+        .section:last-child {
+            margin-bottom: 0;
+        }
 
-    .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:20px;
-    }
+        #profileBio {
+            margin-bottom: 100px !important;
+            transition-delay: 0.3s;
+        }
 
-    .server-card {
-      background:var(--bg-card-soft);
-      border-radius:var(--radius-lg);
-      padding:20px 22px;
-      border:1px solid rgba(255,255,255,.03);
-      text-decoration:none;
-      color:inherit;
-      transition:transform .15s, box-shadow .15s, border .15s;
-    }
+        #profileName {
+            margin-top: -0.3rem;
+        }
 
-    .server-card:hover {
-      transform:translateY(-4px);
-      border-color:var(--accent-soft);
-    }
+        .section-header {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
-    .server-name {
-      font-weight:600;
-      font-size:19px;
-      margin-bottom:6px;
-    }
+        .section-icon {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .server-sub {
-      font-size:14px;
-      color:var(--text-soft);
-      margin-bottom:12px;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
 
-    .badge {
-      padding:5px 11px;
-      border-radius:999px;
-      font-size:12px;
-      margin-right:6px;
-    }
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+        }
 
-    .badge-green { background:rgba(17,138,75,.16); border:1px solid rgba(17,138,75,.6); }
-    .badge-blue  { background:rgba(14,107,184,.16); border:1px solid rgba(14,107,184,.6); }
-    .badge-red   { background:rgba(176,27,51,.16); border:1px solid rgba(176,27,51,.75); }
+        .profile-border {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0f766e, #22d3ee, #0f766e, #22d3ee);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            animation: rotate 8s linear infinite;
+        }
 
-    @media (max-width:880px) {
-      body { scroll-snap-type:none; }
-      .page { flex-direction:column; padding:24px 12px 60px; }
-      .sidebar {
-        position:static;
-        width:100%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:10px;
-        margin-bottom:10px;
-      }
-      .sidebar-menu {
-        display:flex;
-        justify-content:center;
-      }
-      .sidebar-item {
-        border-radius:999px;
-        padding-inline:16px;
-      }
-      main section {
-        min-height:auto;
-        margin-bottom:24px;
-      }
-      .card { padding:32px 18px 36px; }
-      .name { font-size:34px; }
-      .bio-grid { font-size:14px; }
-    }
-  </style>
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px rgba(34, 211, 238, 0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .profile-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-bio h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .bio-tabs {
+            margin-top: 0;
+        }
+
+        .bio-tab {
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-category {
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        .staff-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            padding-left: 0;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .server-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 120px;
+            justify-content: center;
+        }
+
+        .server-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0f766e, #22d3ee);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .server-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .server-card:hover {
+            border-color: var(--border-secondary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .server-info h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .server-role {
+            background: #10b9811a;
+            color: #10b981;
+            border: 1px solid #10b98133;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .server-year {
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
+            margin-bottom: 0.3rem;
+            line-height: 1;
+        }
+
+        .profile-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .bio-details {
+            text-align: left;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .bio-details p {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .bio-details strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .bio-staff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .bio-staff-category {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .bio-staff-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .bio-section-header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--accent-primary);
+            padding-bottom: 0.25rem;
+        }
+
+        .bio-staff-section {
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .bio-links-section {
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .bio-links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes profileGlow {
+            0% {
+                box-shadow: 0 0 60px var(--glow-primary);
+            }
+
+            100% {
+                box-shadow: 0 0 80px var(--glow-secondary);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes textGradient {
+            0% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: repeating-linear-gradient(180deg,
+                    #0f172a 0%,
+                    #0f766e 20%,
+                    #22d3ee 50%,
+                    #0f766e 80%,
+                    #0f172a 100%);
+            background-size: 100% 300%;
+            background-repeat: repeat-y;
+            animation: backgroundFlow 12s linear infinite;
+            opacity: 0.45;
+        }
+
+        @keyframes backgroundFlow {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 0 300%;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .left-panel {
+                left: 20px;
+                width: 290px;
+            }
+
+            .main-content {
+                margin-left: 270px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                max-height: none;
+                margin-bottom: 1rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-primary);
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                padding: 1rem;
+                border-radius: 0;
+            }
+
+            .panel-item {
+                flex: 1 1 auto;
+                max-width: 150px;
+                justify-content: center;
+                border-left: none;
+                border-radius: 8px;
+                padding-left: 1.5rem;
+            }
+
+            .panel-item.active {
+                border-left: none;
+                padding-left: 1.5rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+                margin-left: 0;
+            }
+
+            .section {
+                max-width: 100%;
+                margin: 20px auto;
+                min-height: auto;
+                padding: 1.5rem;
+            }
+
+            .staff-grid {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+
+            .panel-header {
+                display: none;
+            }
+
+            .bio-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        ::selection {
+            background: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        ::-moz-selection {
+            background: var(--accent-primary);
+            color: #ffffff;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="page">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-title">Portfolio</div>
-      <ul class="sidebar-menu">
-        <li class="sidebar-item active" data-target="bio">👤 Bio</li>
-        <li class="sidebar-item" data-target="staff-experience">🛡️ Staff Experience</li>
-      </ul>
-    </aside>
+    <div id="bg-start-audio">
+        <h1>Click Anywhere</h1>
+    </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="content">
-      <!-- PAGINA 1: BIO -->
-      <section id="bio">
-        <div class="card">
-          <div class="section-title">Bio</div>
-          <div class="bio-header">
-            <div class="avatar-wrapper">
-              <div class="avatar"></div>
-            </div>
-            <div class="name">PARTIZIONE</div>
-            <div class="role">Minecraft Staff</div>
-          </div>
+    <audio id="bg-music" loop autoplay>
+        <source src="song.mp3" type="audio/mp3">
+        Il tuo browser non supporta l'elemento audio.
+    </audio>
 
-          <div class="bio-grid">
-            <div class="bio-field">
-              <span class="label">Age</span>
-              <span class="value">16</span>
-            </div>
-            <div class="bio-field">
-              <span class="label">Place</span>
-              <span class="value">Italy</span>
-            </div>
-            <div class="bio-field">
-              <span class="label">Occupation</span>
-              <span class="value">Minecraft Staff &amp; Checker</span>
-            </div>
-          </div>
+    <button id="mute-btn"><i class="fa-solid fa-volume-high"></i></button>
 
-          <div class="subsection-title">Currently</div>
-          <div class="grid">
-            <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
-              <div class="server-name">FruitMC</div>
-              <div class="server-sub">Helper SS · Currently</div>
-              <span class="badge badge-green">SS Verified</span>
-              <span class="badge badge-blue">Helper</span>
-            </a>
-          </div>
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <div class="app-container">
+        <aside class="left-panel">
+            <div class="panel-header" style="justify-content: center;"><i class="fa-solid fa-list"></i></div>
+            <div class="panel-item active" data-section="profileBio">
+                <i class="fa-solid fa-user"></i>
+                <span>Bio</span>
+            </div>
+            <div class="panel-item" data-section="staffExperience">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Staff Experience</span>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <section class="section" id="profileBio">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fa-solid fa-user"></i></div>
+                    <span>Bio</span>
+                </div>
+                <div class="hero-content">
+                    <div class="profile-wrapper">
+                        <div class="profile-border"></div>
+                        <div class="profile-image">
+                            <div class="profile-inner" id="profileAvatar"></div>
+                        </div>
+                    </div>
+                    <h1 id="profileName" style="
+                    font-size: clamp(2.5rem, 5vw, 4rem);
+                    font-weight: 900;
+                    background: linear-gradient(
+                        90deg,
+                        #0f766e 0%,
+                        #22d3ee 25%,
+                        #0f766e 50%,
+                        #22d3ee 75%,
+                        #0f766e 100%
+                    );
+                    background-size: 200% auto;
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    margin-bottom: 0;
+                    letter-spacing: -0.02em;
+                    animation: textGradient 1.5s linear infinite;
+                    position: relative;
+                    background-position: 0% 50%;
+                "></h1>
+                    <p class="subtitle" id="profileSubtitle"></p>
+                    <div class="bio-tabs">
+                        <div class="bio-tab">
+                            <strong>Age:</strong> 16 y/o
+                        </div>
+                        <div class="bio-tab">
+                            <strong>Place:</strong> Italy
+                        </div>
+                        <div class="bio-tab">
+                            <strong>Occupation:</strong> Student • Staff Minecraft
+                        </div>
+                        <div class="bio-staff-section">
+                            <h3 class="bio-staff-title"><i class="fa-solid fa-user-clock"></i> CURRENTLY</h3>
+                            <div class="bio-staff-grid"></div>
+                        </div>
+
+                        <div class="bio-links-section">
+                            <h3 class="bio-staff-title"><i class="fa-solid fa-link"></i> LINKS</h3>
+                            <div class="bio-links-grid"></div>
+                        </div>
+                    </div>
+                    <div class="bio-details" id="bioDetailsContent">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="staffExperience">
+                <div class="section-header">
+                    <div class="section-icon"><i class="fa-solid fa-briefcase"></i></div>
+                    <span>Staff Experience</span>
+                </div>
+            </section>
         </div>
-      </section>
+    </div>
 
-      <!-- PAGINA 2: STAFF EXPERIENCE -->
-      <section id="staff-experience">
-        <div class="card">
-          <div class="section-title">Minecraft Staff Experience</div>
+    <script>
+        const CONFIG = {
+            profile: {
+                name: "Partizione",
+                avatar: "https://i.imgur.com/NmFw4SG.jpeg",
+                subtitle: "Staff & SS Checker",
+                bioContent: ""
+            },
+            staffExperience: {
+                minecraft: [
+                    { serverName: "LunariaMC", role: "STAFFER, SUPPORTER", year: "2024 / 2025", color: "#22d3ee", imgurLink: "https://guns.lol/partizione" },
+                    { serverName: "ScarletMC", role: "MOD, HEAD SS", year: "2024 / 2025", color: "#f97316", imgurLink: "https://guns.lol/partizione" },
+                    { serverName: "FruitMC", role: "HELPER, SS VERIFIED", year: "2024 / 2025", color: "#22c55e", imgurLink: "https://guns.lol/partizione" }
+                ]
+            },
+            links: [
+                { name: "Discord", role: "@Partizione", icon: "fa-brands fa-discord", color: "#5865F2", link: "https://discord.com/users/Partizione" },
+                { name: "NameMC", role: "Partizione", icon: "fa-solid fa-network-wired", color: "#ffffff", link: "https://it.namemc.com/profile/Partizione" },
+                { name: "guns.lol", role: "Tutti i link", icon: "fa-solid fa-link", color: "#22c55e", link: "https://guns.lol/partizione" }
+            ]
+        };
 
-          <div class="grid">
-            <!-- SCARLETMC -->
-            <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
-              <div class="server-name">ScarletMC</div>
-              <div class="server-sub">Mod · Head SS</div>
-              <span class="badge badge-red">Head SS</span>
-              <span class="badge badge-green">SS Verified</span>
-            </a>
+        function initializeProfile() {
+            const avatarContainer = document.getElementById('profileAvatar');
+            avatarContainer.innerHTML = `<img src="${CONFIG.profile.avatar}" alt="Profile avatar">`;
+            document.getElementById('profileName').textContent = CONFIG.profile.name;
+            document.getElementById('profileSubtitle').innerHTML =
+                `<i class="fa-solid fa-magnifying-glass" style="transform: scaleX(-1);"></i> ${CONFIG.profile.subtitle}`;
+            document.getElementById('bioDetailsContent').innerHTML = CONFIG.profile.bioContent;
+        }
 
-            <!-- FRUITMC -->
-            <a class="server-card" href="https://imgur.com/a/fruitmc-4avno4m" target="_blank">
-              <div class="server-name">FruitMC</div>
-              <div class="server-sub">Helper SS</div>
-              <span class="badge badge-green">SS Verified</span>
-              <span class="badge badge-blue">Helper</span>
-            </a>
+        function hexToRgba(hex, alpha) {
+            let c = hex.replace('#', '');
+            if (c.length === 3) c = c.split('').map(x => x + x).join('');
+            const bigint = parseInt(c, 16);
+            const r = (bigint >> 16) & 255;
+            const g = (bigint >> 8) & 255;
+            const b = bigint & 255;
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
 
-            <!-- LUNARIAMC -->
-            <a class="server-card" href="https://imgur.com/a/scarletmc-HO2pQDR" target="_blank">
-              <div class="server-name">LunariaMC</div>
-              <div class="server-sub">Trainee Supporter</div>
-              <span class="badge badge-blue">Support</span>
-            </a>
+        function createCategory(targetSectionId, title, icon, servers) {
+            if (!servers || servers.length === 0) return;
+            const section = document.getElementById(targetSectionId);
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'staff-category';
+            categoryDiv.innerHTML = `<h3><i class="${icon}"></i> ${title}</h3><div class="staff-grid"></div>`;
+            const grid = categoryDiv.querySelector('.staff-grid');
 
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+            servers.forEach(server => {
+                const card = document.createElement('div');
+                card.className = 'server-card';
+                card.addEventListener('click', () => window.open(server.imgurLink, '_blank'));
 
-  <script>
-    const sidebarItems = document.querySelectorAll(".sidebar-item");
-    const sections = document.querySelectorAll("main section");
+                const yearHtml = server.year ? `<div class="server-year">${server.year}</div>` : '';
 
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+                card.innerHTML = `
+                    <div class="server-info">
+                        <h4>${server.serverName}</h4>
+                        ${yearHtml}
+                        <div class="server-role">${server.role}</div>
+                    </div>
+                `;
 
-    sidebarItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        scrollToSection(item.getAttribute("data-target"));
-      });
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            sidebarItems.forEach((i) => {
-              i.classList.toggle("active", i.getAttribute("data-target") === id);
+                if (server.color) {
+                    const roleEl = card.querySelector('.server-role');
+                    roleEl.style.background = hexToRgba(server.color, 0.1);
+                    roleEl.style.borderColor = hexToRgba(server.color, 0.2);
+                    roleEl.style.color = server.color;
+                }
+                grid.appendChild(card);
             });
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
 
-    sections.forEach((sec) => observer.observe(sec));
-  </script>
+            section.appendChild(categoryDiv);
+        }
+
+        function createGenericCards(targetElement, items) {
+            const container = document.querySelector(targetElement);
+            container.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'server-card';
+                card.addEventListener('click', () => window.open(item.link, '_blank'));
+                const cardName = item.name || item.role;
+                card.innerHTML = `
+                    <div class="server-info">
+                        <h4>${item.icon ? `<i class="${item.icon}"></i>&nbsp;` : ''}${cardName}</h4>
+                        <div class="server-role">${item.role}</div>
+                    </div>
+                `;
+                if (item.color) {
+                    const roleEl = card.querySelector('.server-role');
+                    roleEl.style.background = hexToRgba(item.color, 0.1);
+                    roleEl.style.borderColor = hexToRgba(item.color, 0.2);
+                    roleEl.style.color = item.color;
+                }
+                container.appendChild(card);
+            });
+        }
+
+        function highlightActiveSection() {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.panel-item');
+            let currentSection = 'profileBio';
+
+            const viewportMiddle = window.scrollY + (window.innerHeight / 2);
+
+            let closestSection = sections[0];
+            let minDistance = Math.abs(viewportMiddle - (sections[0].offsetTop + sections[0].offsetHeight / 2));
+
+            sections.forEach(section => {
+                const sectionMiddle = section.offsetTop + (section.offsetHeight / 2);
+                const distance = Math.abs(viewportMiddle - sectionMiddle);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestSection = section;
+                }
+            });
+
+            currentSection = closestSection.id;
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === currentSection) {
+                    item.classList.add('active');
+                }
+            });
+
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        }
+
+        const bgMusic = document.getElementById('bg-music');
+        const muteBtn = document.getElementById('mute-btn');
+        const bgStartAudio = document.getElementById('bg-start-audio');
+        const bgStartAudioH1 = bgStartAudio.querySelector('h1');
+        const appContainer = document.querySelector('.app-container');
+
+        bgMusic.volume = 0.075;
+
+        function playBgAudio() {
+            bgStartAudio.style.pointerEvents = 'none';
+            bgStartAudio.style.opacity = '0';
+            bgStartAudioH1.style.opacity = '0';
+
+            setTimeout(() => {
+                document.body.style.overflowY = 'auto';
+                appContainer.classList.add('animate-in');
+                muteBtn.classList.add('animate-in');
+            }, 100);
+
+            bgMusic.play().catch((error) => {
+                console.log("Autoplay failed:", error);
+            });
+        }
+        muteBtn.addEventListener('click', () => {
+            bgMusic.muted = !bgMusic.muted;
+            muteBtn.innerHTML = bgMusic.muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
+        });
+        document.addEventListener('click', playBgAudio, { once: true });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ghostCursor({});
+            initializeProfile();
+
+            // CURRENTLY: solo FruitMC
+            const bioStaff = [
+                { serverName: "FruitMC", role: "HELPER, SS VERIFIED", color: "#22c55e", imgurLink: "https://guns.lol/partizione" }
+            ];
+
+            const bioGrid = document.querySelector('.bio-staff-section .bio-staff-grid');
+            bioGrid.className = 'staff-grid';
+
+            bioStaff.forEach(server => {
+                const card = document.createElement('div');
+                card.className = 'server-card';
+                card.addEventListener('click', () => window.open(server.imgurLink, '_blank'));
+                card.innerHTML = `<div class="server-info">
+                                    <h4>${server.serverName}</h4>
+                                    <div class="server-role">${server.role}</div>
+                                  </div>`;
+                if (server.color) {
+                    const roleEl = card.querySelector('.server-role');
+                    roleEl.style.background = hexToRgba(server.color, 0.1);
+                    roleEl.style.borderColor = hexToRgba(server.color, 0.2);
+                    roleEl.style.color = server.color;
+                }
+                bioGrid.appendChild(card);
+            });
+
+            createGenericCards('.bio-links-grid', CONFIG.links);
+
+            // Solo sezione Minecraft
+            createCategory('staffExperience', 'Minecraft', 'fa-solid fa-cube', CONFIG.staffExperience.minecraft);
+
+            document.querySelectorAll('.panel-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = item.getAttribute('data-section');
+
+                    if (sectionId === 'profileBio') {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        const targetSection = document.getElementById(sectionId);
+                        if (targetSection) {
+                            const scrollPosition = targetSection.offsetTop - 40;
+                            window.scrollTo({
+                                top: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            window.addEventListener('scroll', highlightActiveSection);
+            highlightActiveSection();
+        });
+    </script>
+
+    <script>
+        function ghostCursor(options) {
+        let hasWrapperEl = options && options.element;
+        let element = hasWrapperEl || document.body;
+
+        let randomDelay = options && options.randomDelay;
+        let minDelay = options && options.minDelay || 5;
+        let maxDelay = options && options.maxDelay || 50;
+        const lifeSpan = options && options.lifeSpan || 40;
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let cursor = { x: width / 2, y: width / 2 };
+        let particles = [];
+        let canvas, context, animationFrame;
+
+        let baseImage = new Image();
+        if (options && options.image) {
+            baseImage.src = options.image;
+        } else {
+            baseImage.src =
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAATCAYAAACk9eypAAAAAXNSR0IArs4c6QAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAAFARIAAwAAAAEAAQAAARoABQAAAAEAAABKARsABQAAAAEAAABSASgAAwAAAAEAAgAAh2kABAAAAAEAAABaAAAAAAAAAEgAAAABAAAASAAAAAEAA6ABAAMAAAABAAEAAKACAAQAAAABAAAADKADAAQAAAABAAAAEwAAAAAChpcNAAAACXBIWXMAAAsTAAALEwEAmpwYAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAABqElEQVQoFY3SPUvDQBgH8BREpRHExYiDgmLFl6WC+AYmWeyLg4i7buJX8DMpOujgyxGvUYeCgzhUQUSKKLUS0+ZyptXh8Z5Ti621ekPyJHl+uftfomhaf9Ei5JyxXKfynyEA6EYcLHpwyflT958GAQ7DTABNHd8EbtDbEH2BD5QEQmi2mM8P/Iq+A0SzszEg+3sPjDnDdVEtQKQbMUidHD3xVzf6A9UDEmEm+8h9KTqTVUjT+vB53aHrCbAPiceYq1dQI1Aqv4EhMll0jzv+Y0yiRgCnLRSYyDQHVoqUXe4uKL9l+L7GXC4vkMhE6eW/AOJs9k583ORDUyXMZ8F5SVHVVnllmPNKSFagAJ5DofaqGXw/gHBYg51dIldkmknY3tguv3jOtHR4+MqAzaraJXbEhqHhcQlwGSOi5pytVQHZLN5s0WNe8HPrLYlFsO20RPHkImxsbmHdLJFI76th7Z4SeuF53hTeFLvhRCJRCTKZKxgdnRDbW+iozFJbBMw14/ElwGYc0egMBMFzT21f5Rog33Z7dX02GBm7WV5ZfT5Nn5bE3zuCDe9UxdTpNvK+5AAAAABJRU5ErkJggg==";
+        }
+
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+        prefersReducedMotion.onchange = () => {
+            if (prefersReducedMotion.matches) {
+            destroy();
+            } else {
+            init();
+            }
+        };
+
+        function init() {
+            if (prefersReducedMotion.matches) {
+            console.log(
+                "This browser has prefers reduced motion turned on, so the cursor did not init"
+            );
+            return false;
+            }
+
+            canvas = document.createElement("canvas");
+            context = canvas.getContext("2d");
+            canvas.style.top = "0px";
+            canvas.style.left = "0px";
+            canvas.style.pointerEvents = "none";
+            canvas.style.zIndex = options.zIndex || "9999999999";
+
+            if (hasWrapperEl) {
+            canvas.style.position = "absolute";
+            element.appendChild(canvas);
+            canvas.width = element.clientWidth;
+            canvas.height = element.clientHeight;
+            } else {
+            canvas.style.position = "fixed";
+            document.body.appendChild(canvas);
+            canvas.width = width;
+            canvas.height = height;
+            }
+
+            bindEvents();
+            loop();
+        }
+
+        function bindEvents() {
+            element.addEventListener("mousemove", onMouseMove);
+            element.addEventListener("touchmove", onTouchMove, { passive: true });
+            element.addEventListener("touchstart", onTouchMove, { passive: true });
+            window.addEventListener("resize", onWindowResize);
+        }
+
+        function onWindowResize(e) {
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            if (hasWrapperEl) {
+            canvas.width = element.clientWidth;
+            canvas.height = element.clientHeight;
+            } else {
+            canvas.width = width;
+            canvas.height = height;
+            }
+        }
+
+        function onTouchMove(e) {
+            if (e.touches.length > 0) {
+            for (let i = 0; i < e.touches.length; i++) {
+                addParticle(e.touches[i].clientX, e.touches[i].clientY, baseImage);
+            }
+            }
+        }
+
+        let getDelay = () => Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+        let lastTimeParticleAdded = Date.now(),
+            interval = getDelay();
+
+        function onMouseMove(e) {
+            if (randomDelay) {
+            if (lastTimeParticleAdded + interval > Date.now()) return;
+            lastTimeParticleAdded = Date.now();
+            interval = getDelay();
+            }
+
+            if (hasWrapperEl) {
+            const boundingRect = element.getBoundingClientRect();
+            cursor.x = e.clientX - boundingRect.left;
+            cursor.y = e.clientY - boundingRect.top;
+            } else {
+            cursor.x = e.clientX;
+            cursor.y = e.clientY;
+            }
+
+            addParticle(cursor.x, cursor.y, baseImage);
+        }
+
+        function addParticle(x, y, image) {
+            particles.push(new Particle(x, y, image));
+        }
+
+        function updateParticles() {
+            if (particles.length == 0) {
+            return;
+            }
+
+            context.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+            particles[i].update(context);
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+            if (particles[i].lifeSpan < 0) {
+                particles.splice(i, 1);
+            }
+            }
+
+            if (particles.length == 0) {
+            context.clearRect(0, 0, width, height);
+            }
+        }
+
+        function loop() {
+            updateParticles();
+            animationFrame = requestAnimationFrame(loop);
+        }
+
+        function destroy() {
+            canvas.remove();
+            cancelAnimationFrame(animationFrame);
+            element.removeEventListener("mousemove", onMouseMove);
+            element.removeEventListener("touchmove", onTouchMove);
+            element.removeEventListener("touchstart", onTouchMove);
+            window.addEventListener("resize", onWindowResize);
+        };
+
+        function Particle(x, y, image) {
+            this.initialLifeSpan = lifeSpan;
+            this.lifeSpan = lifeSpan;
+            this.position = { x: x, y: y };
+
+            this.image = image;
+
+            this.update = function (context) {
+            this.lifeSpan--;
+            const opacity = Math.max(this.lifeSpan / this.initialLifeSpan, 0);
+
+            context.globalAlpha = opacity;
+            context.drawImage(
+                this.image,
+                this.position.x,
+                this.position.y
+            );
+            };
+        }
+
+        init();
+
+        return {
+            destroy: destroy
+        }
+        };
+    </script>
+
 </body>
 </html>
